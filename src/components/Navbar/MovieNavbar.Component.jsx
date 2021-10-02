@@ -1,40 +1,24 @@
-import React from "react";
-import { BiChevronDown, BiMenu, BiSearch } from "react-icons/bi";
+import React, { useContext } from "react";
+import { BiChevronDown, BiMenu, BiSearch, BiShareAlt } from "react-icons/bi";
 import { Link } from "react-router-dom";
 
+//Context
+import { MovieContext } from "../../context/Movie.context";
+
 function NavSm() {
+    const { movie } = useContext(MovieContext);
+
     return (
         <>
-            <div className="text-white flex items-center justify-between">
+            <div className="text-gray-700 flex items-center justify-between ">
                 <div>
-                    <h3 className="text-xl font-bold">It All Starts Here!</h3>
-                    <span className="text-gray-400 text-xs flex items-center cursor-pointer hover:text-white">
-                        Delhi NCR <BiChevronDown />
-                    </span>
-                    <span className="text-gray-400 text-xs flex items-center cursor-pointer hover:text-white">
-                        <Link to={`/plays`}>
-                            Plays
-                        </Link>
-                    </span>
+                    <h3 className="text-xl font-bold ">
+                        {movie.original_title}
+                    </h3>
                 </div>
                 <div className="w-8 h-8">
-                    <BiSearch className="w-full h-full" />
+                    <BiShareAlt className="w-full h-full" />
                 </div>
-            </div>
-        </>
-    );
-}
-
-function NavMd() {
-    return (
-        <>
-            <div className="w-full flex items-center gap-3 bg-white  px-3 py-1 rounded-md">
-                <BiSearch />
-                <input
-                    type="search"
-                    className="w-full bg-transparent border-none focus:outline-none"
-                    placeholder="Search for movies, events, plays, sports and activities"
-                />
             </div>
         </>
     );
@@ -46,13 +30,11 @@ function NavLg() {
             <div className="container flex mx-auto px-4 items-center justify-between">
                 <div className="flex items-center w-1/2 gap-3">
                     <div className="w-10 h-10">
-                        <Link to={`/`}>
                         <img
                             src="https://i.ibb.co/zPBYW3H/imgbin-bookmyshow-office-android-ticket-png.png"
                             alt="logo"
                             className="w-full h-full"
                         />
-                        </Link>
                     </div>
                     <div className="w-full flex items-center gap-3 bg-white  px-3 py-1 rounded-md">
                         <BiSearch />
@@ -64,7 +46,7 @@ function NavLg() {
                     </div>
                 </div>
                 <div className="flex items-center gap-3">
-                    <span className="text-gray-200 text-base flex items-center cursor-pointer hover:text-white">
+                <span className="text-gray-200 text-base flex items-center cursor-pointer hover:text-white">
                         <Link to={`/plays`}>
                             Plays
                         </Link>
@@ -84,17 +66,17 @@ function NavLg() {
     );
 }
 
-const Navbar = () => {
+const MovieNavbar = () => {
     return (
         <>
-            <nav className="bg-darkBackground-700 px-4 py-3">
+            <nav className="bg-white border-b-2 lg:border-b-0 lg:bg-darkBackground-700 p-4 ">
                 <div className="md:hidden">
                     {/* Mobile Screen */}
                     <NavSm />
                 </div>
-                <div className="hidden md:flex lg:hidden">
+                <div className="hidden md:block lg:hidden">
                     {/* Medium/Tab Screen */}
-                    <NavMd />
+                    <NavSm />
                 </div>
                 <div className="hidden w-full lg:flex">
                     {/* Large Screen*/}
@@ -105,4 +87,4 @@ const Navbar = () => {
     );
 };
 
-export default Navbar;
+export default MovieNavbar;
